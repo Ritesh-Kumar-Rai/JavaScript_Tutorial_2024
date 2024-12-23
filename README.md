@@ -1,0 +1,1 @@
+The JavaScript 2024 repository which contains all code and practice projects
