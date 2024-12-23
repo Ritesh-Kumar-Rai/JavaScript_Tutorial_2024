@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Selector</title>
+
+    <style>
+        body{
+            background-color: black;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <section id="title" class="heading">
+        <h1>Namaste DOM <span style="display: none;">test text</span> </h1>
+    </section>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio quam expedita vel?</p>
+
+
+    <script>
+        document.getElementById("title");
+        document.getElementById("title").id; // title
+        document.getElementById("title").className; // heading
+
+        document.getElementById("title").getAttribute("id"); // title
+
+        document.getElementById("title").setAttribute('class', 'test');// it replaces className with provided name
+
+        document.getElementById("title").setAttribute("class", "heading test");
+
+        const title = document.getElementById("title");
+
+        //apply style to it
+        title.style.backgroundColor = "green";
+        title.style.padding = "15px";
+        title.style.margin = "15px";
+        title.style.borderRadius = "15px";
+
+        // innerText, textContent, innerHTML
+
+        // In our case in title id we have h1 tag which contains span tag with some text but we
+        // applied display none to it
+        console.log(title.innerText); // it doesn't return the extra texts which has display:none
+        console.log(title.textContent); // wheareas textContent will return all text whether it is displayed or not
+
+        console.log(title.innerHTML); // it will return all html tags with all properties + values
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind in JS</title>
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            font-size: 24px;
+            padding: 0.7rem 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button>Click Me</button>
+</body>
+<script>
+    // Example of Bind()
+
+    class React{
+        constructor(){
+            this.React = "React library v0.9";
+            this.server = "https://localhost:3000";
+
+            document.querySelector("button")
+            .addEventListener("click", this.handleClick.bind(this));
+            // So when we use this.handleClick.call(this); or .apply(this) then the method gets invoked immediately
+            // which we don't want
+
+
+            // That's why we used .bind(this); the .bind() attach the current context this to the function
+
+        }
+
+        handleClick(){
+            this.current_data_context = "current data will not wiped out instead it attached to passed this";
+            console.log("Button Clicked");
+            console.log(this);
+            console.warn(`React server started at: ${this.server}`);
+        }
+
+        display(){
+            console.error(this);
+        }
+    }
+
+    const app  = new React();
+    app.display();
+</script>
+</html>

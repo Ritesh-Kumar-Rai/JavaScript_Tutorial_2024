@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async | BG color changer Advanced</title>
+
+    <style>
+
+        html,body{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            transition: 400ms ease-in-out;
+        }
+        main{
+            position: relative;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%,-50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>BG Changer Advanced</h1>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+    </main>
+</body>
+
+<script>
+
+
+    // Global variable
+    let interval_ref;
+
+    const randomIndexGenerator = (colorRangelength) =>{
+        let random_index = Math.round(Math.random() * colorRangelength);
+        random_index === 15 ? random_index = 14 : null;
+        return random_index;
+    }
+
+    function color_generator(){
+        const color_range = "012345679ABCDEF";
+        let color_one = "#";
+        let color_two = "#";
+        let color_three = "#";
+        let color_four = "#";
+        for(let i=0; i<6;i++){
+            color_one += color_range[randomIndexGenerator(color_range.length)];
+            color_two += color_range[randomIndexGenerator(color_range.length)];
+            color_three += color_range[randomIndexGenerator(color_range.length)];
+            color_four += color_range[randomIndexGenerator(color_range.length)];
+        }
+    
+        const color = `linear-gradient(to right,${color_one},${color_two},${color_three},${color_four})`;
+        // console.warn(color);
+        return color;
+    }
+
+    function applyBgColor(){
+        const body = document.body;
+        
+        if(!interval_ref){
+            interval_ref = setInterval(() => {
+                body.style.background = (color_generator()).toString();
+                // console.log(color_generator().toString());
+            }, 1000);
+        }
+    }
+
+    
+
+    // Adding Event Listener
+    document.querySelector("#start").addEventListener("click", applyBgColor);
+    document.querySelector("#stop").addEventListener("click", ()=>{
+        clearInterval(interval_ref);
+        interval_ref = null;
+        console.warn("Cleared interval");
+    });
+
+</script>
+</html>

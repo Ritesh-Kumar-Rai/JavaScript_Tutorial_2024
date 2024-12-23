@@ -1,0 +1,61 @@
+/* About page CSS */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
+#about-page{
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0F0F0;
+}
+
+#about-page #author-name h2{
+    font-family: "Amatic SC", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5rem;
+    text-align: center; 
+}
+
+#about-page  img{
+    cursor: pointer;
+    transition: 400ms ease-in-out;
+}
+#about-page  img:hover{
+    transform: scale(1.1);
+}
+
+#tech-used{
+    margin-block: 2vh;
+}
+
+#tech-used h3{
+    font-size: 1.6rem;
+}
+
+#tech-used .tech-used-logos{
+    margin-top: 1vh;
+}
+
+#about-page .project-link{
+    width: 517px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+#about-page .project-link > span{
+    margin-bottom: 0.5vh;
+}
+
+#about-page .connect-with-me{
+    width: 517px;
+    margin-block: 2vh;
+}
+#about-page .connect-with-me h3{
+    font-size: 1.6rem;
+}
+
+#about-page .connect-with-me .connect-logos{
+    margin-top: 1vh;
+}

@@ -1,0 +1,407 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* font-family : ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+main{
+    /* background-color: aquamarine; */
+    width: 100%;
+    min-height: 83.34vh;
+}
+
+nav{
+    width: 100%;
+    padding: 1rem 8rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: monospace;
+    background-color: #FFFFFF;
+    position: sticky;
+    top: 0%;
+    z-index: 1;
+}
+
+nav h1{
+    cursor: pointer;
+}
+nav h1:hover{
+    filter: drop-shadow(8px 8px 10px gray);
+}
+
+/* css for Navbar Toggle Button */
+nav #isNavbarToggleOn{
+    display: none; /*css for navbar toggle checkbox*/
+}
+
+nav .ri-menu-2-line{
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+nav .ri-close-large-fill{
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: red;
+}
+
+nav .navbar-toggler{
+    background-color: #F0F0F0;
+    border: 3px solid transparent;
+    padding: 4px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    display: none;
+}
+
+
+nav .navbar-toggler:nth-of-type(1):hover{
+    border-color: black;
+    box-shadow: 5px 5px 6px gray;
+}
+nav .navbar-toggler:nth-child(1){
+    padding: 4px 6px;
+
+}
+nav .navbar-toggler:nth-child(1):hover{
+    border-color: red;
+    box-shadow: 5px 5px 6px gray;
+}
+
+
+ul{
+    /* background-color: blanchedalmond; */
+    width: 50%;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+nav a{
+    color: black;
+    text-decoration: none;
+    /* background-color: aqua; */
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    border-radius: 1rem;
+    background-color: #2A3441;
+    bottom: 0%;
+    left: -100%;
+    transition: 400ms ease-in-out;
+}
+nav a:hover::after{
+    left: 0%;
+}
+
+.right-panel{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.right-panel button{
+    display: flex;
+    align-items: center;
+    gap: 0.7vw;
+    padding: 0.39vh 1vw;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    transition: 400ms ease-in-out;
+    cursor: pointer;
+}
+
+.right-panel button:hover{
+    filter: drop-shadow(5px 5px 8px gray);
+    border: 1px solid black;
+}
+
+
+/* Add class after content for login btn after the user logged in */
+.after-modal-login-indicator{
+    position: relative;
+}
+.after-modal-login-indicator::after{
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    background-color: green;
+    right: -25%;
+    bottom: -9%;
+
+}
+
+
+.user-login-logout-info{
+    visibility: hidden;
+    display: none;
+    height: 0;
+    width: auto;
+    position: absolute;
+    top: 80%;
+    right: 8.5%;
+    z-index: 5;
+    background-color: rgb(27, 27, 27);
+    color: aliceblue;
+    border-radius: 10px;  
+    filter: drop-shadow(6px 6px 8px black);
+    padding: 5px;
+}
+.user-login-logout-info > ul{
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 5px;
+    min-width: 100%;
+}
+.user-login-logout-info > ul > li{
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.user-login-logout-info > ul > li:hover{
+    background-color: aliceblue;
+    color: black;
+    .ri-shut-down-line{
+        color: red;
+    }
+}
+
+
+/* .right-panel button .ri-shopping-cart-2-fill{
+    position: relative;
+    font-size: 1.4rem;
+}
+
+.right-panel button .ri-shopping-cart-2-fill::after{
+    content: "";
+    position: absolute;
+    background-color: black;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    bottom: 0%;
+    right: -25%;
+} */
+
+/* HOME PAGE HTML CSS */
+
+header{
+    width: 100%;
+    height: 40vh;
+    background-color: #2A3441;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#products-list{
+    padding: 5rem;
+}
+
+.our-products{
+    text-align: center;
+    font-size: 2rem;
+    /* font-weight: 400; */
+    padding: 2rem;
+    border-bottom: 2px solid rgb(180, 176, 176);
+}
+.our-products h1{
+    /* font-family: monospace; */
+    font-weight: 600;
+}
+
+#filter-home-items{
+    padding-top: 4rem;
+    padding-inline: 4rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    /* background-color: bisque; */
+}
+#filter-home-items button{
+    margin-left: 1.40vw;
+    margin-top: 1.40vh;
+    padding: 0.5vh 0.7vw;
+    font-size: 0.90rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+#filter-home-items button:hover{
+    background-color: #2A3441;
+    color: aliceblue;
+    filter: drop-shadow(5px 5px 8px gray);
+}
+
+.filter-btn-pressed{
+    background-color: #2A3441;
+    color: aliceblue;
+    filter: drop-shadow(5px 5px 8px gray);
+}
+
+#search-home{
+    text-align: center;
+    padding-block-end: 4rem;
+    padding-inline: 4rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+}
+#search-home > form{
+    width: 100%;
+    /* background-color: purple; */
+   
+    
+}
+
+
+#search-home input[type="search"]{
+    font-size: 1.20rem;
+    padding-block: 0.50rem;
+    padding-inline: 0.50rem;
+    width: 90%;
+    /* height: auto; */
+    transition: 400ms ease-in-out;
+    border-radius: 0.4rem;
+    border: none;
+    background-color: #F0F0F0;
+}
+
+#search-home input[type="search"]:hover{
+    filter: drop-shadow(5px 5px 8px gray);
+}
+#search-home input[type="search"]:focus{
+    filter: drop-shadow(5px 5px 8px gray);
+    border: none;
+    outline: none;
+    
+}
+
+#search-home #search-btn{
+    background-color: transparent;
+    padding-block: 4px;
+    padding-inline-end: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms ease-in-out;
+}
+#search-home #search-btn:hover{
+    transform: scale(1.2);
+}
+#search-home #search-btn .ri-search-line{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+
+
+
+
+.ri-star-fill{
+    /* background-color: gold; */
+    color: gold;
+}
+
+/* FOOTER CSS */
+
+footer{
+    width: 100%;
+    min-height: 10vh;
+    padding: 2rem;
+    background-color: #2A3441;
+    color: aliceblue;
+    font-size: 1.40rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+}
+
+footer .personals h5{
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+footer .personals h5::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    border-radius: 1rem;
+    background-color: #FFFF;
+    bottom: 0%;
+    left: -100%;
+    transition: 400ms ease-in-out;
+}
+footer .personals h5:hover::after{
+    left: 0%;
+}
+
+footer .i-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+footer i{
+    cursor: pointer;
+    transition: 400ms ease-in-out;
+}
+
+footer i:hover{
+    color: red;
+}
+
+
+/* #product-page{
+    background-color: aqua;
+    width: 100%;
+    height: 100vh;
+    padding: 5rem;
+} */
+
+.hover:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  .hover-btn:hover{
+    filter: drop-shadow(5px 5px 8px gray);
+  }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures and Lexical Scope in JS</title>
+
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            
+        }
+        button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="orange">Orange</button>
+        <button id="green">Green</button>
+    </div>
+
+</body>
+<script>
+    // Lexical Scope
+    console.log("Lexical part started..");
+    let outer_variable = "outer variable";
+
+    function parent(){
+        console.log(outer_variable);
+        let naam = "Ritesh Rai";
+
+        function innerFunc(){
+            let inner_var = "inner variable";
+            console.warn(naam, outer_variable);
+
+            function child(){
+                let child_var = 56;
+                console.error(outer_variable,naam,inner_var);
+            }
+            // console.log(child_var); error
+            child();
+        }
+
+        function sibling(){
+            console.log(naam,outer_variable);
+            // console.log(inner_var); error
+        }
+        // console.log(inner_var); error
+        innerFunc();
+        sibling();
+
+    }
+    // console.log(naam); error
+    parent();
+
+    // Closures in JS
+    console.log("Closure Part started..");
+
+    function closure(){
+        let game = "watchdogs2";
+
+        function accessGame(){
+            console.log(game);
+            return game;
+        }
+
+        return accessGame;
+    }
+
+    const accessing_closure = closure();
+    console.warn(accessing_closure())
+</script>
+
+<script>
+   /* document.getElementById("orange").onclick = function(){
+        document.body.style.backgroundColor = "orange";
+    }
+    document.getElementById("green").onclick = function(){
+        document.body.style.backgroundColor = "green";
+    } */ 
+
+    // Practical Example of Closure
+
+    function handleClick(color){
+        // document.body.style.backgroundColor = `${color}`;
+
+        return function(){
+            document.body.style.backgroundColor = `${color}`;
+        }
+    }
+
+
+    document.getElementById("orange").onclick = handleClick("orange");
+    document.getElementById("green").onclick = handleClick("green");
+
+
+</script>
+</html>

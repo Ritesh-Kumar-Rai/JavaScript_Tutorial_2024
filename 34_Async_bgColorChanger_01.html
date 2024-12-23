@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async | BG color changer</title>
+
+    <style>
+
+        html,body{
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        main{
+            position: relative;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%,-50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Start button should change the color using setInterval</h1>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+    </main>
+</body>
+
+<script>
+
+    // Global variable
+    let interval_ref;
+
+    function color_generator(){
+        const color_range = "012345679ABCDEF";
+        let color = "#";
+        for(let i=0; i<6;i++){
+            color+= color_range[Math.round(Math.random() * color_range.length)];
+        }
+        // console.warn(color.length);
+        return color;
+    }
+
+    function applyBgColor(){
+        const body = document.body;
+        if(!interval_ref){
+            interval_ref = setInterval(() => {
+                body.style.backgroundColor = (color_generator()).toString();
+            }, 1000);
+        }
+    }
+
+    
+
+    // Adding Event Listener
+    document.querySelector("#start").addEventListener("click", applyBgColor);
+    document.querySelector("#stop").addEventListener("click", ()=>{
+        clearInterval(interval_ref);
+        interval_ref = null;
+        console.warn("Cleared interval");
+    });
+
+</script>
+</html>

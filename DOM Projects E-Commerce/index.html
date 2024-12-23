@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla JS - Ecommerce project</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/modal_style.css" />
+    <link rel="stylesheet" href="/styles/sidebar_style.css" />
+    <link rel="stylesheet" href="/styles/contact_page_style.css">
+    <link rel="stylesheet" href="/styles/about_page_style.css">
+    <link rel="stylesheet" href="/styles/responsive_media.css" />
+
+    <!-- CDN script for Sweet Alert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body onload="doRouting()">
+    <nav class="navbar">
+      <h1 onclick="HapticOn()">Vanilla Store</h1>
+      <input type="checkbox" name="isNavbarToggleOn" id="isNavbarToggleOn">
+      <label class="navbar-toggler" for="isNavbarToggleOn" onclick="HapticOn(true)"><i class="ri-menu-2-line"></i></label>
+        <ul>
+          <label class="navbar-toggler" for="isNavbarToggleOn" onclick="HapticOn(true)"><i class="ri-close-large-fill"></i></label>
+          <a href="/" id="home">Home</a>
+          <a href="/products" id="product">Products</a>
+          <a href="/contact" id="contact">Contact</a>
+          <a href="/about" id="about">About</a>
+        </ul>
+        <div class="right-panel">
+          
+          <button class="user-login-modal-popup" id="user-login-popup">
+            <i class="ri-user-3-fill"></i>Login
+          </button>
+          
+            <div class="user-login-logout-info">
+              <ul>
+                <li id="username-after-loggedIn">${username}</li>
+                <li onclick="logOut_my_account()"><i class="ri-shut-down-line"></i> Log-out</li>
+              </ul>
+            </div> 
+          
+          <button onclick="moveUp()" id="cart_moveUp_button">
+            <i class="ri-shopping-cart-2-fill"></i>Cart (0)
+          </button>
+        </div>
+
+    </nav>
+
+    <main id="main"></main>
+
+    <!-- MODAL SECTION -->
+    <div class="back-formodal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>LOGIN</h3>
+          <i class="ri-close-large-fill user-login-modal-popup"></i>
+        </div>
+        <div class="modal-body">
+          <form method="get" id="modal-login-form">
+            <div class="form-control">
+              <label for="email">Email address</label>
+              <div class="input-with-sensitive-info">
+                <input type="email" name="email" id="email" placeholder="epicgames@junior.com" required />
+                <small>We'll never share your email with anyone else.</small>
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label for="password">Password</label>
+              <div class="input-with-sensitive-info">
+                <input
+                  type="password"
+                  aria-hidden="false"
+                  name="password"
+                  id="password"
+                  placeholder="674Ary@U*uv"
+                  required
+                />
+                <small></small>
+              </div>
+            </div>
+
+            <div>
+              <input type="checkbox" name="remember" id="remember" />
+              <label for="remember" onclick="HapticOn()">Remember Me</label>
+            </div>
+
+            <input type="submit" id="log-in" value="LOG IN" />
+            <button type="button" id="imGuest">I'm a Guest</button>
+          </form>
+
+          <div class="small-text-container">
+            <small id="create-account-link" onclick="displayRegisterForm()"
+              >Haven't created an account, Click here to CREATE ACCOUNT</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <aside>
+      <div class="aside-header">
+        <!-- aside header -->
+        <div>
+          <i class="ri-shopping-bag-line"></i>
+          <span id="cart_header_total">Cart (0)</span>
+        </div>
+        <i class="ri-close-large-line" onclick="move()"></i>
+      </div>
+
+      <!-- aside body -->
+
+      <!-- container for items -->
+      <div class="items-in-cart">
+        <!-- card -->
+
+        <!-- <div>
+          <div class="card-back-panel">
+            <div class="cart-one-card">
+              <div class="left-image">
+                <img
+                  src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg"
+                  alt="img_src"
+                  srcset=""
+                  height="80px"
+                />
+              </div>
+              <div class="right-card-info">
+                <h5>
+                  Lorem, ipsum dolor. Lorem ipsum dolor sit amet consectetur
+                  adipisicing.
+                </h5>
+                <div class="bottom-section-of-card">
+                  <span>$780</span>
+                  <div class="input-for-quantity">
+                    <button type="button">-</button>
+                    <input
+                      type="number"
+                      id="quantity"
+                      name="quantity"
+                      min="1"
+                      max="50"
+                    />
+                    <button type="button">+</button>
+                  </div>
+                  <i class="ri-delete-bin-6-fill"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="hover-panel">Total : $200</div>
+          </div>
+        </div> -->
+        <!-- card end -->
+
+      </div>
+
+      <!-- Container for Cart Summary -->
+      <div class="cart-summary">
+        <h3>Summary</h3>
+        <br />
+
+        <div class="summary-item">
+          <span>Subtotal</span>
+          <span id="subtotal">₹0</span>
+        </div>
+        <div class="summary-item">
+          <span>GST Tax</span>
+          <span id="tax">18%</span>
+        </div>
+        <div class="summary-item">
+          <span>Shipping Charges</span>
+          <span id="shipping">₹0</span>
+        </div>
+        <div class="summary-item">
+          <span>Total</span>
+          <span id="total" class="summary-total">₹0</span>
+        </div>
+        <button class="checkout-button">Checkout</button>
+      </div>
+      <!-- summary end -->
+    </aside>
+
+    <footer>
+      <div class="personals">
+        <h5>RITESH KUMAR RAI</h5>
+      </div>
+      <div class="i-icons" onclick="HapticOn()">
+        <i class="ri-linkedin-box-fill" onclick="HapticOn();redirectTo('linkedin')"></i>
+        <i class="ri-facebook-circle-fill" onclick="HapticOn()"></i>
+        <i class="ri-reactjs-line" onclick="HapticOn()"></i>
+        <i class="ri-twitter-x-fill" onclick="HapticOn();redirectTo('twitter')"></i>
+        <i class="ri-instagram-fill" onclick="HapticOn()"></i>
+      </div>
+    </footer>
+
+    <script>
+
+    // Code for Haptic Feedback
+    function HapticOn(isLongEffect = false){
+
+        if('vibrate' in navigator){
+            navigator.vibrate(100);
+
+            if(isLongEffect){
+              navigator.vibrate([40, 40, 40,40,40,40,40,40,40,40,40]); // tick-tick-tick effect
+            }
+
+        }
+        
+    }
+
+
+      function move() {
+        document.querySelector("aside").classList.remove("moveUp");
+        document.querySelector("aside").classList.add("moveDown");
+        HapticOn(true);
+      }
+
+      function moveUp() {
+        document.querySelector("aside").classList.remove("moveDown");
+        document.querySelector("aside").classList.add("moveUp");
+        HapticOn(true);
+      }
+
+      function redirectTo(webpage = "linkedin"){
+          switch(webpage){
+              case "linkedin": 
+                window.open("https://www.linkedin.com/in/ritesh-kumar-rai-bb6901296");
+                break;
+              case "twitter": 
+                window.open("https://x.com/RITESH_RAI555?t=qXj6QkIZDmpeH6NAmf15bQ&s=09");
+                break;
+              default:
+                return;
+          }
+      }
+    </script>
+
+
+
+    <script src="JS/custom_router.js" defer></script>
+    <script src="JS/App.js" defer></script>
+    <script src="JS/handle_product_card_routing_&_productPage.js"></script>
+    <script src="JS/modal_handler.js" defer></script>
+    <script src="JS/modal_popup.js" defer></script>
+    <script src="JS/check_SessionData_of_userLoggedIn.js" defer></script>
+    <script src="JS/addToCart_functionality.js"></script>
+    <script src="JS/cart_sidebar_handling_and_management.js"></script>
+    <script src="JS/filter_products.js"></script>
+    <script src="JS/search_functionality.js"></script>
+    <script src="JS/checkout_handling.js"></script>
+
+  </body>
+</html>

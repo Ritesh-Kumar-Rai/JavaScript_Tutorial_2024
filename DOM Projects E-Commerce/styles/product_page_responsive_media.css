@@ -1,0 +1,70 @@
+/* Responsive CSS for Product Page */
+@media screen and (max-width : 1390px) {
+    #product-page{
+        padding-inline: 2rem;
+    }
+    .product-details-panel{
+        padding-inline-end: 0rem;
+    }
+}
+
+
+
+@media screen and (max-width : 912px){
+
+
+    #product-page{
+        margin-top: 3rem;
+    }
+
+     /* CSS for Product Page Heading paragraph */
+     .product-details-panel > h1{
+        font-size: 3rem;
+     }
+
+     .product-details-panel > h2{
+        font-size: 2.5rem;
+     }
+
+     .product-details-panel > h3{
+        font-size: 1.3rem;
+     }
+     
+     .product-details-panel > p{
+        font-size: 1.5rem;
+     }
+
+}
+
+/* CSS for TABLET size or lower resolution devices like mobile */
+@media screen and (max-width : 768px) {
+    .product-container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4rem;
+    }
+
+    /* css for product image and detail container to take full width */
+    .image-area{
+        height: 40%;
+        width: 100%;
+    }
+
+    .product-details-panel{
+        width: 100%;
+        padding-inline-start: 0rem;
+    }
+}
+
+
+/* Responsive css for mobile device */
+@media screen and (max-width : 425px) {
+
+    #product-page{
+        padding-inline: 1rem;
+    }
+
+    .image-area{
+        height: 60vh;
+    }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events in JavaScript</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+
+<script>
+    // adding onclick event directly to html elements as attributes is not a good practice
+    // because if your app become scalable then it will cause an issue
+    
+    //  better way
+    //document.getElementById("owl").onclick = function(e){
+        // e is a `event object`
+        // console.warn(e.target);
+        // Note this has some limitations like it does not provide event propagation and other features
+    //}
+
+    // Best approach
+    // .addEventListener(event_typeName,callback_func,[options]);
+    // It has 3 parameters:
+    /*
+        ** Parameters **
+
+                eventType: The type of event to listen for. This can be a DOM event (such as click, mouseover, keydown, etc.), a JavaScript event (such as load, error, etc.), or a custom event (such as myEvent).
+                listener: The function to be executed when the event occurs. This function will be called with three arguments: event (the event object), target (the element that triggered the event), and options (any options passed to the event listener).
+        
+        ** Options **
+
+                useCapture: A boolean value that specifies whether the event listener should be executed in the capture phase or the bubbling phase. If true, the event listener will be executed during the capture phase, and if false (the default), it will be executed during the bubbling phase.
+                passive: A boolean value that specifies whether the event listener should be executed asynchronously. If true, the event listener will be executed asynchronously, and if false (the default), it will be executed synchronously.
+    */
+    document.getElementById("owl")
+    .addEventListener("click",function(e){
+        // console.log(e);
+    },false);
+
+    // Why we pass 3rd argument as false, by default is false;
+    // It is used for event propagation means the event propagation has 2 contexts
+    // 1. Event Bubling [by default or when we pass false]
+    // 2. Event Capturing [when we pass true]
+
+    // What is event bubling?
+    /* Assume you have an :
+            <div>
+                Outer
+                <div>Inner</div>    
+            </div>
+            and you have added event listener to both div of click type.
+            Then when user clicks on inner div, then this event first get's exec
+            then Outer listener gets exec 
+    */
+
+    // What is Event Capture?
+    /* When you pass true as third args, then when user clicks on inner div
+       the outer listener gets exec then inner listener.
+    */
+
+    // Example :
+    // document.getElementById("images")
+    // .addEventListener("click",()=>{
+    //     console.log("Inside list")
+    // });
+
+    /*document.getElementById("owl")
+    .addEventListener("click", ()=>{
+        console.log("owl clicked.")
+    });*/
+
+    // with event capturing
+    // document.getElementById("owl")
+    // .addEventListener("click", (e)=>{
+    //     e.stopPropagation();
+    //     console.log("owl clicked.")
+    // },true);
+
+    // document.getElementById("google")
+    // .addEventListener("click", (e)=>{
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     console.log("a clicked")
+    // });
+
+    document.querySelector("#images")
+    .addEventListener("click", (e)=>{
+        console.log(e.target.tagName);
+        if(e.target.tagName === "IMG"){
+            const parentLi = e.target.parentNode;
+            console.log(parentLi);
+            parentLi.remove();
+        }
+    });
+
+</script>
+</html>

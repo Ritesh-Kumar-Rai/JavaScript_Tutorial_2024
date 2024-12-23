@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Custom Typer Library</title>
+    <style>
+       
+       *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       html,body{
+           background-color: black;
+           height: 100%;
+           width: 100%;
+       }
+
+       .container{
+            padding: 2rem;
+            color: azure;
+            font-size: 5em;
+       }
+
+       .text-area{
+            color: red;
+       }
+       .cursor{
+            background-color: yellow;
+            width: 5px;
+            height: auto;
+            display: inline-block;
+       }
+       p{
+        display: inline-block;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>JavaScript is </p>
+        <span class="text-area"></span>
+        <span class="cursor">&nbsp;</span>
+    </div>
+</body>
+<script>
+    const text_input = document.querySelector(".text-area");
+
+    const words = ["Powerful", "Amazing", "Awesome", "Easy to Learn", "Easy to Code", "Scripting Language"];
+
+    async function sleep(time){
+        return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                resolve(true);
+            },time);
+        });
+    }
+
+    async function type(){
+
+        const randomIndex = Math.floor(Math.random() * words.length);
+
+        for(let i=0; i<words[randomIndex].length; i++){
+            await sleep(200);
+            // text_input.innerHTML += words[0][i];
+            text_input.appendChild(document.createTextNode(words[randomIndex][i]));
+        }
+        console.log(text_input.innerHTML.length);
+        await sleep(900);
+        erase();
+    }
+    
+    async function erase(){
+        console.log(text_input.hasChildNodes());
+
+        while(text_input.hasChildNodes()){
+            await sleep(60);  
+            text_input.removeChild(text_input.lastChild);
+        }
+        await sleep(900);
+        type();
+    }
+
+    
+   setTimeout(async function(){
+        await type();
+    },2000);
+</script>
+</html>

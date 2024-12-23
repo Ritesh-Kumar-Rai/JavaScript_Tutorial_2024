@@ -1,0 +1,233 @@
+/* Responsive CSS for navbar */
+@media screen and (max-width : 1054px) {
+    nav{
+        padding: 1rem 4rem;
+    }
+}
+
+/* Responsive CSS for Cart Sidebar for Specific Resolution */
+@media  screen and (max-width : 1285px) {
+    aside{
+        width: 35%;
+    }
+}
+
+
+@media screen and (max-width : 912px) {
+    /* time for navbar toggle btn */
+    nav{
+        position: fixed;
+    }
+    nav > ul{
+        height: 60vh;
+        width: 70vw;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* height: auto; */
+        gap: 1rem;
+        background-color: aliceblue;
+        align-items: center;
+        box-shadow: -5px 0px 5px gray;
+        border-bottom-left-radius: 5px;
+        transition: 0.4s ease-in-out;
+    }
+    nav > ul,li{
+        
+        text-align: center;
+    }
+   
+    nav a{
+        min-width: 30%;
+        padding: 10px;
+    }
+    a::after{
+        background-color: #2A3441;
+    }
+
+    .user-login-logout-info{
+        top: 42%;
+        right: 24%;
+    }
+
+    .user-login-logout-info ul,li{
+        color: aliceblue;
+    }
+
+    /* change the right panel of navbar css */
+    .right-panel{
+            height: 20vh;
+            width: 70vw;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 61vh;
+            right: -100%;
+            height: auto;
+            gap: 2rem;
+            background-color: aliceblue;
+            align-items: center;   
+            padding-block: 2.3rem;
+            box-shadow: -5px 0px 5px gray;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            transition: 0.8s ease-in-out;
+    }
+    .right-panel button{
+        width: auto;
+        font-size: 1.3rem;
+        padding: 0.40vh 2vw;
+    }
+
+    /* css style for navbar toggler btn */
+    nav .navbar-toggler{
+        display: block;
+    }
+    nav .navbar-toggler:nth-child(1){
+        align-self: flex-end;
+        margin-right: 20px;
+    }
+
+    #isNavbarToggleOn:checked ~ ul{
+        right: 0%;
+    }
+    #isNavbarToggleOn:checked ~ .right-panel{
+        right: 0%;
+    }
+
+    /* CSS for Header Section */
+    header{
+        margin-top: 9.4vh;
+        text-align: center;
+    }
+
+    /* CSS for CART sidebar */
+    aside{
+        width: 50vw;
+    }
+
+    /* Responsive CSS for About Page */
+    #about-page{
+        margin: 0 0;
+        margin-top: 8rem;
+
+    }
+   
+}
+
+/* Responsive CSS for Home Page */
+
+@media screen and (max-width : 812px) {
+    nav{
+        padding: 1rem 3rem;
+    }
+
+    /* css for logout info container */
+    .user-login-logout-info{
+        top: 42%;
+        right: 15%;
+    }
+
+    #products-list{
+        padding: 1rem;
+        padding-block-end: 4rem;
+    }
+    .our-products{
+        /* padding: 0.5rem; */
+        padding: 2rem 0.5rem;
+    }
+
+    /* css for filter home buttons */
+    #filter-home-items{
+        padding-inline: 2rem;
+    }
+
+    #filter-home-items button{
+        margin-left: 5vw;
+        margin-top: 2.50vh;
+        padding: 5px 9px;
+    }
+
+    /* css for search bar home section */
+    #search-home{
+        padding-inline: 0.1rem;
+    }
+    #search-home > form{
+        padding: 0;
+    }
+    #search-home #search-btn{
+        padding-inline-end: 0px;
+    }
+    
+}
+
+/* Responsive CSS for Nav logout info. &  Cart Sidebar for small Tablet Resolution and Contact/About Page */
+@media  screen and (max-width : 640px) {
+
+    /* css for logout info container */
+    .user-login-logout-info{
+        top: 42%;
+        right: 10%;
+    }
+
+    aside{
+        width: 65%;
+    }
+
+    #contact-form-section{
+        flex-direction: column;
+        position: static;
+        transform: translate(0%,0%);
+        margin-top: 8rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* css for about page */
+    #about-page{
+        padding: 0vh 5vw;
+    }
+    #about-page .project-link{
+        width: 100%;
+    }
+    #about-page .connect-with-me{
+        width: 100%;
+    }
+}
+
+/* Responsive CSS for Navbar & CART Sidebar for Mobile Devices */
+@media  screen and (max-width : 435px) {
+    nav{
+        padding: 1rem 1rem;
+    }
+
+    /* css for logout info container */
+    .user-login-logout-info{
+        top: 42%;
+        right: 5%;
+    }
+
+    aside{
+        width: 100%;
+        height: 100vh;
+        scroll-behavior: smooth;
+    }
+    .items-in-cart{
+        height: 40vh;
+    }
+
+    .cart-summary{
+        height: 45vh;
+    }
+
+}
+
+
+/* Responsive CSS for Footer */
+@media  screen and (max-width : 444px) {
+    footer{
+        justify-content: center;
+    }
+}

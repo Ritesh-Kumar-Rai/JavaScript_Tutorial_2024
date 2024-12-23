@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Seat Booking System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&display=swap');
+       
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            background-color: darkslateblue;
+            color: azure;
+        }
+        h1{
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        main{
+            font-family: 'Playfair Display SC', serif;
+            padding: 2rem;
+            height: auto;
+            width: 100%;
+        }
+        section{
+            min-height: 250px;
+     
+        }
+        h3{
+            text-align: center;
+        }
+
+        .btn-section{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #confirm-booking-btn{
+            padding: 8px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 1em;
+            cursor: pointer;
+            background-color: black;
+            color: azure;
+            transition: all 0.3s ease;
+        }
+        #confirm-booking-btn:active{
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        #confirm-booking-btn:hover{
+            box-shadow: 2px 2px 5px rgba(8, 8, 8, 0.491);
+        }
+
+        .seats-area{
+            margin: 2rem 5rem;
+        }
+        .seat-btn{
+            padding: 5px;
+            width: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 1rem 0.50rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 3px 3px 5px gray;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+    <script> const user_selected_seats = [];</script>
+</head>
+<body onload="renderSeats()">
+    <main>
+        <h1>Concert Seat Booking System</h1>
+        <section class="vip-section">
+            <h3>VIP Section</h3>
+            <div class="seats-area"></div>
+        </section>
+        <section class="general-section">
+            <h3>General Section</h3>
+            <div class="seats-area"></div>
+        </section>
+        <section class="economy-section">
+            <h3>Economy Section</h3>
+            <div class="seats-area"></div>
+        </section>
+
+        <div class="btn-section">
+            <button id="confirm-booking-btn">Confirm Booking</button>
+        </div>
+    </main>
+    <!-- 
+        --Seat layout--
+        1. VIP Section: 5x5 grid (25 seats)
+        2. General Section: 6x6 grid (36 seats)
+        3. Economy Section: 8x8 grid (64 seats)
+     -->
+</body>
+<script>
+    const seats = {
+        vip: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+        general: [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61],
+        economy: [62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125]
+    };
+
+    // DOM SELECTION
+    const vip_section = document.querySelector(".vip-section > .seats-area");
+    const general_section = document.querySelector(".general-section > .seats-area");
+    const economy_section = document.querySelector(".economy-section > .seats-area");
+
+    function renderEachSection_seats(domElement,arr,grid_size){
+        let index = 0;
+
+        for(let i=1; i<=Number(grid_size); i++){
+            const row = document.createElement("div");
+            row.setAttribute("class", `row-${i}`);
+            for(let j=1; j<=Number(grid_size); j++){
+                row.innerHTML += `<button class="seat-btn" key=${index} title="row-${i} seat-${arr[index]}">${arr[index]}</button>`;
+                index++;
+            }
+            row.style.width = "100%";
+            row.style.display = "flex";
+            row.style.justifyContent = "center";
+            row.style.alignItems = "center";
+            domElement.appendChild(row);
+        }
+
+                      
+            
+    }
+
+    function renderSeats(){
+        for(let key in seats){
+           switch (key) {
+                case 'vip':
+                    renderEachSection_seats(vip_section, seats[key],5);
+                    break;
+                case 'general':
+                    renderEachSection_seats(general_section, seats[key],6);
+                    break;
+                case 'economy':
+                    renderEachSection_seats(economy_section, seats[key],8);
+                    break;
+                default:
+                    break;
+           }
+        }
+
+        check_for_buttons();
+    }
+
+
+    /*
+    let index = 0;
+        for(let i=1; i<=5; i++){
+            const row = document.createElement('div');
+            row.setAttribute("class", `row-${i}`);
+            for(let j=1; j<=5;j++){
+                row.innerHTML += <button>arr[index]</button>
+                index++;
+            }    
+            dom.appendChild(row)
+        }
+    */
+</script>
+
+<!-- User Click Functionality -->
+<script>
+
+   const confirm_btn = document.getElementById("confirm-booking-btn");
+
+
+   function check_for_buttons(){
+    const btns = document.querySelectorAll(".seat-btn");
+
+        btns.forEach((btn)=>{
+            btn.addEventListener("click", (e)=>{
+                const clickedbtn = e.target;
+                const index = Number(clickedbtn.getAttribute("key"));
+                const row_number = clickedbtn.parentElement.getAttribute("class");
+                const seat_section = (clickedbtn.parentElement.parentElement.parentElement).getAttribute("class");
+                let category_name = "";
+                let seat_number = new Number();
+                switch(seat_section){
+                        case "vip-section":
+                                  l =seats["vip"].filter((seat,i)=> {
+                                    if(i === index){
+                                        seat_number = seat;
+                                    }
+                                });
+                                category_name = "vip";
+                                break;
+                        case "general-section":
+                                seats["general"].filter((seat,i)=> {
+                                    if(i === index){
+                                        seat_number = seat;
+                                    }
+                                });
+                                category_name = "general";
+                                break; 
+                        case "economy-section":
+                                seats["economy"].filter((seat,i)=> {
+                                    if(i === index){
+                                        seat_number = seat;
+                                    }
+                                });
+                                category_name = "economy";
+                                break; 
+                        default: break;
+                    }
+                    
+                let index_of_users_selected_btn = new Number();    
+                const isExists = user_selected_seats.some((seat_info, i) => {
+                                    if(seat_info.seat_no === seat_number){
+                                        index_of_users_selected_btn = i;
+                                        return true;
+                                    }
+                                });
+                // console.log(user_selected_seats);                    
+                if(isExists){
+                    
+                    if(clickedbtn.style.backgroundColor === "orange" || clickedbtn.style.color === "white"){
+                        clickedbtn.style.backgroundColor = "";
+                        clickedbtn.style.color = "";
+                    }else{
+                        clickedbtn.style.backgroundColor = "orange";
+                        clickedbtn.style.color = "white";
+                    }
+                    user_selected_seats.splice(index_of_users_selected_btn,1); 
+                    // alert(index)
+                    return;
+                }
+
+
+                if(user_selected_seats.length >= 5){
+                        alert("You have reached maximum seats selection!");
+                        return;
+                }else{
+                    if(clickedbtn.style.backgroundColor === "orange" || clickedbtn.style.color === "white"){
+                        clickedbtn.style.backgroundColor = "";
+                        clickedbtn.style.color = "";
+                    }else{
+                        clickedbtn.style.backgroundColor = "orange";
+                        clickedbtn.style.color = "white";
+                    }
+
+
+                    user_selected_seats.push({
+                                                seat_no: seat_number,
+                                                row_no: `${row_number}`,
+                                                category: `${category_name}`,
+                                        });
+
+                    
+                }        
+
+            });
+        });
+   }
+
+
+
+   confirm_btn.addEventListener("click", (e)=>{
+        if(user_selected_seats.length <= 0){
+            alert("You first need to select alteast one seat!");
+            return;
+        }
+        const seats = [];
+        const cats = [];
+        user_selected_seats.forEach((each)=>{
+             seats.push([each.seat_no,each.row_no]);
+             cats.push(each.category);
+        });
+
+        alert(`Ticket Confirmed: with Total seat no. : ${seats} in ${cats}`);
+
+   });
+
+</script>
+</html>

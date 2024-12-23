@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create element and append in html doc</title>
+</head>
+<body>
+    <section id="appendInsideMe">welcome</section>
+</body>
+
+<script>
+
+    const body = document.getElementsByTagName("body");
+    body[0].style.backgroundColor = "#212121";
+    body[0].style.color = "#fff"
+
+    const div = document.createElement("div");
+    console.log(div);
+
+    // apply style
+    div.style.backgroundColor = "green";
+    div.style.color = "aliceblue";
+    div.style.padding = "18px";
+    div.style.borderRadius = "20px";
+    div.style.textAlign = "center";
+    div.style.fontSize = "20px";
+
+    // add attribute and text
+    //div.id = "anyone"; // not optimized
+    div.setAttribute("id", Math.round(Math.random() *10 +1)); // optimized approach
+    //div.className = "anyclass"; // not optimized
+    div.setAttribute("class", "mycreatedDiv"); // optimized approach
+    div.setAttribute("title", "myDiv");
+    // div.textContent = "Namaste"; // not optimized because it first get value by traversing then set
+    const textNode = document.createTextNode("--Namaste JS DOM--");
+    
+    // let's append this created text node into div
+    div.appendChild(textNode);
+
+    // append this created div to body
+    
+    //body[0].appendChild(div); 
+    //  or
+    // document.body.appendChild(div);
+    // or
+    document.querySelector("body").appendChild(div);
+
+    // if you want to add any created element inside any tag or element do this :
+
+    const section = document.getElementById("appendInsideMe")
+    // section.appendChild(div);
+    console.log(section);
+
+
+    console.log(div);
+</script>
+</html>

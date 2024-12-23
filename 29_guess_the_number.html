@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number</title>
+    <style>
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  width: 300px;
+  max-width: 750px;
+  min-width: 480px;
+  margin: 0 auto;
+  background-color: #212121;
+}
+
+.lastResult {
+  color: white;
+  padding: 7px;
+}
+
+.guesses {
+  color: white;
+  padding: 7px;
+}
+
+button {
+  background-color: #141414;
+  color: #fff;
+  width: 250px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 30px;
+  border-style: none;
+  margin-top: 30px;
+  /* margin-left: 50px; */
+  cursor: pointer;
+}
+
+#subt {
+  background-color: #161616;
+  color: #ffffff;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  border-style: none;
+  margin-top: 50px;
+  /* margin-left: 75px; */
+}
+
+#guessField {
+  color: #000;
+  width: 250px;
+  height: 50px;
+  font-size: 30px;
+  border-style: none;
+  margin-top: 25px;
+
+  /* margin-left: 50px; */
+  border: 5px solid #6c6d6d;
+  text-align: center;
+}
+
+#guess {
+  font-size: 55px;
+  /* margin-left: 90px; */
+  margin-top: 120px;
+  color: #fff;
+}
+
+.guesses {
+  background-color: #7a7a7a;
+}
+
+#wrapper {
+  box-sizing: border-box;
+  text-align: center;
+  width: 450px;
+  min-height: 550px;
+  background-color: #474747;
+  color: #fff;
+  font-size: 25px;
+  padding-bottom: 1rem;
+}
+
+h1 {
+  background-color: #161616;
+
+  color: #fff;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+  text-align: center;
+}
+
+.isError{
+  color: red;
+}
+
+.lowOrHi{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+    </style>
+</head>
+<body>
+        
+        <div id="wrapper">
+          <h1>Number guessing game</h1>
+        <p>Try and guess a random number between 1 and 100.</p>
+        <p>You have 10 attempts to guess the right number.</p>
+        </br>
+            <form class="form">
+                <label for="guessField" id="guess">Guess a number</label>
+                <input type="text" id="guessField" class="guessField">
+                <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
+            </form>
+    
+            <div class="resultParas">
+                <p >Previous Guesses: <span class="guesses"></span></p>
+                <p >Guesses Remaining: <span class="lastResult">10</span></p>
+                <div class="lowOrHi"></div>
+            </div>
+        </div>
+</body>
+
+<script>
+
+// get dom elements
+const form = document.querySelector(".form");
+const guesses = document.querySelector(".guesses");
+const guesses_remaining = document.querySelector(".lastResult");
+const lowOrHi = document.querySelector(".lowOrHi");
+
+// generating random number between 1 to 100
+let randNum = Math.round(Math.random() * 100 + 1);
+let guess = new Number(1);
+const arr_of_previous_guesses = new Array();
+let flag = true;
+
+//printing values of variables for testing (temporal)
+console.log("current guess : ",guess);
+console.log("random : ",randNum);
+console.log(`Array ${arr_of_previous_guesses} and length : ${arr_of_previous_guesses.length}`);
+
+
+// ===functions===
+function validateInput(userInput){
+    
+  //validate user input
+      if(userInput < 1){
+          display_data("Oops! value must not less than 1",true);
+      }else if(userInput > 100){
+          display_data("Oops! value should not greater than 100", true);
+      }else if(isNaN(userInput)){
+          display_data("Incorrect input! enter valid number", true);
+      }else{
+        // display_data("all is perfect..");
+        compare(userInput);
+      }
+}
+
+function display_data(message, err = false){
+
+  const span_tag = document.createElement("span");
+  span_tag.style.fontSize = "1.40rem"; // apply some css style
+  
+  // check if any error occured or not
+  if(err){
+    while(lowOrHi.hasChildNodes()){
+        lowOrHi.removeChild(lowOrHi.firstChild);
+    }
+    span_tag.setAttribute("class", "isError");
+    span_tag.appendChild(document.createTextNode(message));  
+    lowOrHi.appendChild(span_tag);
+  }else{
+        while(lowOrHi.hasChildNodes()){
+          lowOrHi.removeChild(lowOrHi.firstChild);
+        }
+        span_tag.removeAttribute("class");
+        span_tag.appendChild(document.createTextNode(message));
+        lowOrHi.appendChild(span_tag);
+        guesses_remaining.textContent = `${10 - guess}`;
+        guesses.textContent = `${arr_of_previous_guesses}`;
+        
+      }
+}
+
+function compare(userInput){
+
+          if(guess <= 10){
+                if(userInput < randNum){
+                    display_data("Your Guess is Too Low");
+                }else if(userInput > randNum){
+                  display_data("Your Guess is Too High");
+                }else if(userInput === randNum){
+                  display_data(`Congrats🥳! You won the game --- machine guess ${randNum}`);
+                  endGame();
+                }
+                arr_of_previous_guesses.push(userInput);
+                guess++;
+                // console.log("current guess is ",guess);
+          }else{
+            display_data(`Game Over! Actual guess is ${randNum}`,true);
+            endGame();
+          }    
+    
+}
+
+function endGame(){
+    const button = document.createElement("button");
+    button.setAttribute("type","button");
+    button.setAttribute("id", "start_over_btn");
+    button.appendChild(document.createTextNode("Start Again 🎮"));
+    lowOrHi.appendChild(button);
+
+    // disable input field
+    document.getElementById("guessField").setAttribute("disabled","");
+    flag = false;
+
+    const start_over_btn = document.getElementById("start_over_btn");
+    console.log("btn :",start_over_btn);
+    start_over_btn.addEventListener("click",(e)=>{
+          newGame();
+    });
+
+}
+
+function newGame(){
+      while(lowOrHi.hasChildNodes()){
+            lowOrHi.removeChild(lowOrHi.firstChild);
+      };
+      const guessField = document.getElementById("guessField");
+      guessField.removeAttribute("disabled");
+      guessField.value = "";
+      arr_of_previous_guesses.length = 0;
+      guess = 1;
+      guesses_remaining.textContent = "10";
+      guesses.textContent = "";
+      
+      randNum = Math.round(Math.random() * 100 + 1);
+      console.log("new random: "+randNum);
+      flag = true;
+
+
+}
+
+
+
+
+// adding event on form
+form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+
+      const userInput = parseInt(document.getElementById("guessField").value);
+      console.log(userInput);
+      flag ? validateInput(userInput) : null;
+      
+});
+
+</script>
+</html>

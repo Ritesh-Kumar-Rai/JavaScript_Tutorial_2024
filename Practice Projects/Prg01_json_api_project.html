@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON PLACEHOLDER</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        main{
+            min-height: 100%;
+            height: auto;
+            width: 100%;
+            background: radial-gradient(circle, #2E073F, #7A1CAC, #AD49E1, #EBD3F8);
+        }
+        h1{
+            padding: 1rem;
+            text-align: center;
+            align-content: center;
+            margin-bottom: 2rem;
+            word-spacing: 1rem;
+        }
+        .cards{
+            padding: 2rem;
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            background-color: #001F3F;
+        }
+        .single-card{
+            background: linear-gradient(to bottom, #87A2FF, #C4D7FF, #FFD7C4, #FFF4B5, #001F3F);
+            height: 200px;
+            width: 300px;
+            color: #7A1CAC;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.4s ease-in-out;
+            filter: drop-shadow(8px 8px 5px white);
+        }
+        
+        .text-area{
+            background-color: rgba(0, 0, 0, 0.333);
+            color: aliceblue;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: padding 400ms ease-in-out;
+        }
+        .text-area::after{
+            content: "";
+            background: linear-gradient(55deg, #522258, #8C3061, #C63C51, #D95F59);
+            position: absolute;
+            height: 0%;
+            width: 0%;
+            left: 0;
+            bottom: -100%;
+            z-index: -1;
+            border-radius: 40%;
+            transition: 0.9s ease-in-out;
+        }
+        
+        .text-area:hover::after{
+            bottom: -10%;
+            width: 150%;
+            height: 300px;
+            border-bottom-left-radius: 0;
+        }
+        
+        .single-card:hover .text-area{
+            padding: 2rem;
+        }
+        .single-card:hover{
+            filter: drop-shadow(10px 10px 5px white);
+            transform: scale(1.1);
+        }
+
+        </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+        <main id="root">
+            <h1>JSON  PLACEHOLDER  API  ALBUM DATA</h1>
+            <section class="cards"> 
+                
+            </section>
+        </main>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+        
+          <button type="button" class="btn-close text-light btn-light bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="display:flex; justify-content: center; align-items: center;">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+<script>
+    const url = "https://jsonplaceholder.typicode.com/photos";
+    let response_data = new Array();
+
+    function displayCards(){
+        const arr = [];
+        response_data.filter((elem)=>{
+            const currentId = elem.albumId;
+            if(! arr.includes(currentId)){
+                 arr.push(currentId);
+             }   
+        });
+    
+        let html_content = "";
+        arr.forEach((album)=>{
+            html_content+=`
+            <!-- ${album} card -->
+                <div class="single-card">
+                    <div class="text-area" onclick="getAllData(${album})">
+                        <h3>Album ${album}</h3>
+                    </div>
+                </div>
+            `;
+        });
+        document.querySelector(".cards").innerHTML = html_content;
+    }
+
+
+    const getAllData = (album_id) =>{
+        const datas = response_data.filter((data)=>{
+            if(data.albumId === album_id){
+                return data;
+            }
+        });
+
+        let html_content = "";
+        datas.forEach((image_data)=>{
+            html_content += `
+                <div class="single-card" style="background: url('${image_data.thumbnailUrl}'); background-repeat: no-repeat; background-size: cover;">
+                    <div class="text-area" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="showImage(${image_data.id})">
+                        <h3>Album ${image_data.title}</h3>
+                    </div>
+                </div>
+            `;
+        });
+        document.querySelector(".cards").innerHTML = html_content;
+    }
+
+    const showImage = (image_id) =>{
+        let url = "";
+        response_data.filter((img)=>{
+            if(img.id === image_id){
+                url = img.url;
+            }
+        });
+       document.querySelector(".modal-body").innerHTML = `
+       <img src="${url}" alt="${url}" height="300px">
+       `;
+       console.log("inside showImage()");
+    }
+
+    fetch(url)
+    .then(response => response.json())
+    .then(response =>{
+        response_data = [...response];
+        console.warn(response_data[0], response_data.length);
+        displayCards();
+    })
+    .catch(error => console.error(error));
+</script>
+  
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async | setInterval</title>
+    <style>
+        button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>setInterval in JS</h1>
+    
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+
+
+   <script>
+
+    let intervalRefernceId;
+
+    document.getElementById("start")
+    .addEventListener("click", ()=>{
+        if(!intervalRefernceId){
+
+            intervalRefernceId = setInterval(()=>{
+                console.warn("Ritesh Rai",Date.now());
+            },1000);
+        }
+    });
+
+    document.getElementById("stop")
+    .addEventListener("click",()=>{
+            clearInterval(intervalRefernceId);
+            intervalRefernceId = null;
+            console.warn("STOPPED");
+    });
+   </script>
+</body>
+</html>

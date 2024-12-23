@@ -1,0 +1,92 @@
+/* CSS for Contact Page */
+
+#contact-form-section{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    
+}
+
+.contact-us-info{
+    background-color: #F0F0F0;
+    padding: 1.5rem 1rem;
+    font-family: 'Trebuchet MS';
+    border-radius: 1rem;
+}
+
+.contact-us-info > h3{
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-us-info > p{
+    margin-block-end: 1.4rem;
+    color: rgb(74, 72, 72);
+    font-weight: 600;
+}
+
+ol > li{
+    list-style: none;
+    font-weight: 500;
+    color: rgb(74, 72, 72);
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1vh;
+    align-items: center;
+}
+
+ol > li > i{
+    font-size: 2rem;   
+}
+
+ol > li > span{
+    font-size: 0.9rem;
+}
+
+
+/* CSS for Contact Page form */
+#contact-us-form{
+    height: 30vh;
+    /* width: 20vw; */
+    width: 341.46px;
+    padding: 2.5rem 1rem;
+    align-items: center;
+}
+.contact-form-control{
+    display: flex;
+    flex-direction: column;
+    gap: 0.9vh;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+#contact-us-form > input{
+    padding: 0.5rem 1rem;
+    border: 2px solid gray;
+    border-radius: 5px; 
+    transition: 400ms ease-in-out;
+}
+
+#contact-us-form > input:hover{
+    box-shadow: 5px 5px 8px gray;
+}
+
+#contact-us-form > input:focus{
+    box-shadow: 5px 5px 8px gray;
+}
+
+#contact-us-form > input[type="button"]{
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: azure;
+}
